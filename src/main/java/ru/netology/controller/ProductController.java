@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.netology.service.ProductService;
 
 import java.sql.SQLException;
-import java.util.List;
 
 @RestController
 public class ProductController {
 
-    private ProductService service;
+    private final ProductService service;
 
     public ProductController(ProductService service) {
         this.service = service;
@@ -22,8 +21,4 @@ public class ProductController {
         return service.getProducts(name);
     }
 
-    /*@GetMapping("/cc")
-    public String getCustomers() throws SQLException {
-        return service.getCustomes();
-    }*/
 }

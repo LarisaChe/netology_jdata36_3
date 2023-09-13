@@ -2,10 +2,10 @@ package ru.netology.model;
 
 public class Customer {
     private int id;
-    private String name; //VARCHAR(32) NOT NULL,
-    private String surname; //VARCHAR(32) NOT NULL,
-    private int age; //SMALLINT NOT NULL CHECK (age >= 0),
-    private String phone_number; //VARCHAR(15)
+    private String name;
+    private String surname;
+    private int age;
+    private String phone_number;
 
     public Customer(int id, String name, String surname, int age, String phone_number) {
         this.id = id;

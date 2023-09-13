@@ -21,26 +21,19 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepository {
 
-    @Autowired
-    private DataSource dataSource;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final String query;
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    public ProductRepository() {
+    public ProductRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.query = read("query01.sql");
     }
 
-    public String getProducts(String name) throws SQLException {
+    public String getProducts(String name) {
         Map<String, String> params = new HashMap<>();
         params.put("paramName", name);
-        Connection connection = dataSource.getConnection();
-        List<String> products = namedParameterJdbcTemplate.query(read("query01.sql"), params, (resultSet, rowNum) -> {
-            String product_name = resultSet.getString("product_name");
-            return product_name;
-        });
+        List<String> products = namedParameterJdbcTemplate.queryForList(query, params, String.class);
         //products.forEach(System.out::println);
         return products.toString();
     }
@@ -54,9 +47,9 @@ public class ProductRepository {
         }
     }
 
-    public String getCustomes() throws SQLException {  //List<Customer>
-        Connection connection = dataSource.getConnection();
-        List<Customer> customers = jdbcTemplate.query("select * from customers", (resultSet, rowNum) -> {
+    public String getCustomes()   {
+        String q = "select * from jdata36.customers";
+        List<Customer> customers = namedParameterJdbcTemplate.query(q, (resultSet, rowNum) -> {
             int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             String surname = resultSet.getString("surname");

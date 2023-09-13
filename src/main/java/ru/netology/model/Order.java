@@ -3,11 +3,11 @@ package ru.netology.model;
 import java.util.Date;
 
 public class Order {
-    private int id; // SERIAL PRIMARY KEY,
-    private Date dat; // DATE NOT NULL,
-    private int customer_id; // integer REFERENCES customers (id),
-    private String product_name; // VARCHAR(100) NOT NULL,
-    private float amount; // numeric CHECK (price > 0)
+    private int id;
+    private Date dat;
+    private int customer_id;
+    private String product_name;
+    private float amount;
 
     public Order(int id, Date dat, int customer_id, String product_name, float amount) {
         this.id = id;

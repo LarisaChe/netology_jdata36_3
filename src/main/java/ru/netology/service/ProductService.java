@@ -4,12 +4,11 @@ import org.springframework.stereotype.Service;
 import ru.netology.repository.ProductRepository;
 
 import java.sql.SQLException;
-import java.util.List;
 
 @Service
 public class ProductService {
 
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
